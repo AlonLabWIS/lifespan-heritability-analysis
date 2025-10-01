@@ -7,7 +7,7 @@ This repository accompanies the paper:
 
 ## Research Context
 
-This repo investigates how extrinsic mortality affects estimates of lifespan heritability. Traditional twin studies often find heritability estimates around 20-30%, but this work shows that when extrinsic mortality is properly accounted for, the intrinsic heritability of human lifespan is approximately 50%. The analysis uses both the Saturating-Removal (SR) model and Makeham Gamma-Gompertz (MGG) model to demonstrate simulate different genetic groups with distinct lifespan distributions
+This repo investigates how extrinsic mortality affects estimates of lifespan heritability. Traditional twin studies often find heritability estimates around 20-30%, but this work shows that when extrinsic mortality is properly accounted for, the intrinsic heritability of human lifespan is approximately 50%. The analysis uses both the Saturating-Removal (SR) model and Makeham Gamma-Gompertz (MGG) model to simulate different genetic groups with distinct lifespan distributions
 
 ## Installation
 
@@ -193,69 +193,66 @@ plt.show()
 ## Data and Results Folders
 
 ### `saved_data/` (inputs)
-Contains the raw inputs used by notebooks and modules:
+Contains the raw inputs used by notebooks and modules, including:
 - Human Mortality Database (HMD) lifetable extracts (period and cohort) used by `src/HMD_lifetables.py`
 - Cohort death-rate tables and auxiliary CSVs used to compute hazards/survival and to plot empirical curves
 - Twin-study aggregates (e.g., Danish, Swedish, SATSA, and U.S. siblings datasets) used for comparisons
 
 ### `saved_results/` (derived artifacts)
-Stores precomputed, heavy-to-recreate outputs that the notebooks read directly:
+Stores precomputed, heavy-to-recreate outputs that the notebooks read directly, including:
 - Correlation matrices (pickles) for SR and MGG models across extrinsic mortality grids and cutoff ages, per cohort
 - Calibrated parameter dictionaries for SR/MGG (`model_param_calibrations.py`) used to instantiate models in notebooks
 - Convenience result bundles for quick plotting and tables
 
 **Purpose**: Speed, reproducibility, and to avoid lengthy recomputation on clone. You can regenerate these with the calibration notebooks/workflows, but it may take time and CPU.
 
-## Module-by-Module Guide (`src/`)
+## Module-by-Module Guide (`src/`) by Theme
 
+### Models
 - **`simulation.py`**:
   - Defines `SimulationParams` and `SR_sim` for SR model simulations
   - Supports constant/time-dependent/agent-specific extrinsic hazard `h_ext`
   - Parallel chunking with `multiprocessing.Pool`; produces Kaplan–Meier and Nelson–Aalen estimators, hazards, and summary stats
+- **`gamma_gompertz.py`**:
+  - `GammaGompertz` class: fit to HMD data, custom hazard arrays, or KM estimators
+  - Sample death times (with/without heterogeneity), create twin death tables, and plot survival/hazard
 
+### Data (HMD)
+- **`HMD_lifetables.py`**:
+  - `HMD` class to load HMD lifetables (period/cohort) and compute hazard, survival, death distributions
+  - Plot helpers: survival, hazard, Gompertz/GGM fits, geometric-mean hazard curves, Makeham term trends
+- **`HMD_death_rates.py`**:
+  - Lightweight reader for cohort death-rate tables from `saved_data/`
+  - Quick helpers to compute survival/hazard from age X and plot
+
+### Analysis
+- **`twin_analysis.py`**:
+  - Build twin death tables from simulated death times (including flags for extrinsic deaths)
+  - Filtering helpers (age thresholds, parameter-conditioned subsets)
+- **`correlation_analysis.py`**:
+  - Pearson/intraclass correlations and phi coefficients
+  - Binned variance decomposition proxy for heritability
+- **`survival_analysis.py`**:
+  - Unconditional/conditional survival past age X; relative survival probabilities (RSP)
+  - Excess survival exponential fits; hazard for twins of people past age X
+- **`model_free_twins.py`**:
+  - Model-free partitioning of total mortality into intrinsic/extrinsic using `HMD`
+  - Generate correlated twin lifespans and visualize correlations without invoking the SR/MGG models
+
+### Plotting
+- **`plotting.py`**:
+  - Visualization helpers for SR simulations: survival, hazards, path summaries, hazard fits
+- **`hetero_plotting.py`**:
+  - Higher-level figures for relative survival probabilities, error bars (bootstrap/delta/Wilson), and twin correlations
+
+### Utilities
 - **`sr_utils.py`**:
   - Base human parameters (`karin_params`) and plotting colors/labels
   - `create_param_distribution_dict`: build MZ/DZ/uncorrelated parameter arrays with specified heterogeneity
   - `create_sr_simulation`: factory combining params with `SimulationParams` to return an `SR_sim`
   - `gompertz_hazard(t, m, a, b)`: helper for extrinsic hazard profiles
-
-- **`gamma_gompertz.py`**:
-  - `GammaGompertz` class: fit to HMD data, custom hazard arrays, or KM estimators
-  - Sampling death times with parameter heterogeneity; twin death tables for MZ/DZ
-  - Hazard/survival plotting utilities and optimization helpers (e.g., KS-constrained fitting)
-
-- **`HMD_lifetables.py`**:
-  - `HMD` class to load HMD lifetables (period/cohort) and compute hazard, survival, death distributions
-  - Plot helpers: survival, hazard, Gompertz/GGM fits, geometric-mean hazard curves, Makeham term trends
-
-- **`HMD_death_rates.py`**:
-  - Lightweight reader for cohort death-rate tables from `saved_data/`
-  - Quick helpers to compute survival/hazard from age X and plot
-
-- **`twin_analysis.py`**:
-  - Build twin death tables from simulated death times (including flags for extrinsic deaths)
-  - Filtering helpers (age thresholds, parameter-conditioned subsets)
-
-- **`correlation_analysis.py`**:
-  - Pearson/intraclass correlations and phi coefficients
-  - Binned variance decomposition proxy for heritability
-
-- **`survival_analysis.py`**:
-  - Unconditional/conditional survival past age X; relative survival probabilities (RSP)
-  - Excess survival exponential fits; hazard for twins of people past age X
-
-- **`plotting.py`**:
-  - Visualization helpers for SR simulations: survival, hazards, path summaries, hazard fits
-
-- **`hetero_plotting.py`**:
-  - Higher-level figures for relative survival probabilities, error bars (bootstrap/delta/Wilson), and twin correlations
-
 - **`bootstrap.py`**:
   - Bootstrap/delta/Wilson interval utilities for relative survival probability curves
-
-- **`model_free_twins.py`**:
-  - Model-free partitioning of total mortality into intrinsic/extrinsic using `HMD`
-  - Generate correlated twin lifespans and visualize correlations without invoking the SR/MGG models
 
 ## Notebook-by-Notebook Guide (`notebooks/`)
 
