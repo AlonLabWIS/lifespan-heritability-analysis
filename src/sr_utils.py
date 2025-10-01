@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from src.simulation import SR_sim, SimulationParams
 
-# Constants
+# Constants as fit in Karin et al 2019, Nature Communications
 eta_karin = 0.00135 * 365
 beta_karin = 0.15 * 365
 kappa_karin = 0.5

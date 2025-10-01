@@ -1024,9 +1024,9 @@ class HMD:
             cbar.set_label('Year', size=18)  # Set fontsize for colorbar label
         
         #ax.errorbar(valid_years, m_vals, yerr=m_errs, fmt='none', ecolor='gray', capsize=3, alpha=0.7)
-        ax.set_xlabel('Year', fontsize=14)
-        ax.set_ylabel('Extrinsic Mortality [1/years]', fontsize=14)
-        ax.set_title(f'Extrinsic Mortality over Time', fontsize=15)
+        ax.set_xlabel('Birth year', fontsize=14)
+        ax.set_ylabel('Extrinsic mortality [year$^{-1}$]', fontsize=14)
+        ax.set_title(f'Extrinsic mortality over time', fontsize=15)
         ax.set_yscale('log')
         ax.grid(True, which='both', ls='--', alpha=0.3)
         return ax

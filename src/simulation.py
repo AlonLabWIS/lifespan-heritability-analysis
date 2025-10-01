@@ -308,17 +308,17 @@ class SimulationParams:
         """
         Print a concise summary of core simulation parameters.
         """
-        eta_val = np.mean(self.eta) / 365
-        beta_val = np.mean(self.beta) / 365
+        eta_val = np.mean(self.eta)
+        beta_val = np.mean(self.beta)
         kappa_val = np.mean(self.kappa)
         epsilon_val = np.mean(self.epsilon)
         xc_val = np.mean(self.Xc)
 
         print_str = (
-            f"η = {eta_val:.5f} day⁻¹·year⁻¹, "
-            f"β = {beta_val:.2f} day⁻¹, "
+            f"η = {eta_val:.5f} year⁻2, "
+            f"β = {beta_val:.2f} year⁻¹, "
             f"κ = {kappa_val:.1f}, "
-            f"ε = {epsilon_val:.3f} day⁻¹, "
+            f"ε = {epsilon_val:.3f} year⁻¹, "
             f"Xc = {int(round(xc_val))}"
         )
         print(print_str)
