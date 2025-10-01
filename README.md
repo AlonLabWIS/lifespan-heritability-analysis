@@ -310,12 +310,12 @@ If you use this code or data in your research, please cite:
 
 **Paper** (when published):
 ```
-Shenhar, B., Pridham, G., De Oliveira, T. L., Raz, N., Yang, Y., Deelen, J., Hägg, S., & Alon, U. (Year). Heritability of intrinsic human lifespan is about 50% when confounding factors are addressed. [Journal Name], [Volume], [Pages]. DOI: [DOI]
+Shenhar, B., Pridham, G., De Oliveira, T. L., Raz, N., Yang, Y., Deelen, J., Hägg, S., & Alon, U. (Year). Heritability of intrinsic human lifespan is about 50% when confounding factors are addressed. XX, XX, XX. DOI: XX
 ```
 
 **Repository**:
 ```
-Shenhar, B., Pridham, G., De Oliveira, T. L., Raz, N., Yang, Y., Deelen, J., Hägg, S., & Alon, U. (Year). Heritability of intrinsic human lifespan is about 50% when confounding factors are addressed [Code]. GitHub. https://github.com/[username]/[repository-name]
+Shenhar, B., Pridham, G., De Oliveira, T. L., Raz, N., Yang, Y., Deelen, J., Hägg, S., & Alon, U. (Year). Heritability of intrinsic human lifespan is about 50% when confounding factors are addressed [Code]. GitHub. https://github.com/AlonLabWIS/lifespan-heritability-analysis
 ```
 
 **Data Attribution**:
