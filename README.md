@@ -295,6 +295,9 @@ Stores precomputed, heavy-to-recreate outputs that the notebooks read directly:
 - **`examples_model_sim_basics.ipynb`**:
   - Minimal SR and MGG demonstrations: sampling, survival/hazard plots, basic fits
 
+- **`extrinsic_mortality_calibrations.ipynb`**:
+  - Calculates extrinsic mortality levels (m_ex) for each study (Danish, Swedish, SATSA)
+
 All notebooks start with a common setup cell that:
 - Locates the project root and adds `src/` to `sys.path`
 - Sets deterministic seeds and uses Arial font
