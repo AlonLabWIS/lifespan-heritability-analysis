@@ -134,12 +134,9 @@ herskind_study = {
         'cohort_end': 1900,
         'country': 'denmark',
         'filter_age': 15,
-        'mex_male': 3.99e-03,  # Fitted using Makeham-Gamma-Gompertz model
-        'mex_std_male': 6.65e-04,
-        'mex_female': 4.15e-03,  # Fitted using Makeham-Gamma-Gompertz model
-        'mex_std_female': 5.51e-04,
-        'mex': 4.07e-03,  # Average of male and female MGG fits
-        'mex_std': 6.17e-04  # Average of male and female std
+        'mex': 0.004021472340910448,
+        'mex_lower': 0.0034217026367541715,
+        'mex_upper': 0.004726372074239845
     },
     'cohorts': {
         '1870-1880': {
@@ -271,18 +268,9 @@ ljinquist_study = {
         'cohort_end': 1925,
         'country': 'sweden',
         'filter_age': 37,
-        'loghext_male': -2.4676,
-        'loghext_std_male': 0.1809,
-        'loghext_female': -2.5463,
-        'loghext_std_female': 0.2276,
-        'loghext': -2.5070,  # Average of male and female
-        'loghext_std': 0.2043,  # Average of male and female std
-        'mex_male': 3.43e-03,  # Fitted using Makeham-Gamma-Gompertz model
-        'mex_std_male': 1.42e-03,
-        'mex_female': 3.09e-03,  # Fitted using Makeham-Gamma-Gompertz model
-        'mex_std_female': 1.35e-03,
-        'mex': 3.25e-03,  # Average of male and female MGG fits
-        'mex_std': 1.39e-03  # Average of male and female std
+        'mex': 0.00278,
+        'mex_lower': 0.00166,
+        'mex_upper': 0.00465
     },
     'combined': {
         'male_MZ': {
@@ -332,10 +320,10 @@ satsa_study = {
         'cohort_end': 1935,
         'country': 'sweden',
         'filter_age': 50,
-        # Convert the weighted average h_ext (1.48e-03) and bounds ([1.01e-03, 2.17e-03])
-        # to log10 scale: log10(1.48e-03) ≈ -2.8297 and an average error of ≈ 0.1662.
-        'mex': 2e-03,
-        'mex_std': 0.0008,
+        # Mean m: 0.00155, Lower: 0.00085, Upper: 0.00280
+        'mex': 0.00155,
+        'mex_lower': 0.00085,
+        'mex_upper': 0.00280,
     },
     'combined': {
         'h2': {
