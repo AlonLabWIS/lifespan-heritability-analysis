@@ -63,6 +63,8 @@ import matplotlib.pyplot as plt
 
 from src.sr_utils import create_param_distribution_dict, create_sr_simulation
 from src.plotting import SR_plotting
+from src.twin_analysis import calc_twin_death_table
+from src.correlation_analysis import calc_pearson_corr_twin_deaths, calc_icc
 
 # 1) Baseline SR parameters (single-value arrays as expected by the factory)
 baseline_params = {
@@ -98,6 +100,19 @@ dz_params = create_param_distribution_dict(
 sim_mz = create_sr_simulation(params_dict=mz_params, n=len(mz_params['Xc']), tmax=120, dt=0.25, save_times=0.5, parallel=False)
 sim_dz = create_sr_simulation(params_dict=dz_params, n=len(dz_params['Xc']), tmax=120, dt=0.25, save_times=0.5, parallel=False)
 
+# 4.5) Compute and print lifespan correlations for MZ and DZ twins
+
+# Create twin death tables
+mz_death_table = calc_twin_death_table(sim_mz)
+dz_death_table = calc_twin_death_table(sim_dz)
+
+# Compute Pearson correlation and ICC for each
+mz_pearson = calc_pearson_corr_twin_deaths(sim_mz)
+dz_pearson = calc_pearson_corr_twin_deaths(sim_dz)
+
+print(f"MZ twin Pearson correlation: {mz_pearson:.3f}")
+print(f"DZ twin Pearson correlation: {dz_pearson:.3f}")
+
 # 5) Plot survival and hazard for MZ vs DZ
 plotter_mz = SR_plotting(sim_mz)
 plotter_dz = SR_plotting(sim_dz)
@@ -114,7 +129,6 @@ ax2.set_title('SR: Hazard (NAF-smoothed)')
 ax2.legend()
 plt.tight_layout()
 plt.show()
-```
 
 Notes:
 - Use `params` to select which SR parameter(s) to vary (`'eta'|'beta'|'kappa'|'epsilon'|'Xc'|'h_ext'`).
