@@ -64,7 +64,7 @@ import matplotlib.pyplot as plt
 from src.sr_utils import create_param_distribution_dict, create_sr_simulation
 from src.plotting import SR_plotting
 from src.twin_analysis import calc_twin_death_table
-from src.correlation_analysis import calc_pearson_corr_twin_deaths, calc_icc
+from src.correlation_analysis import calc_pearson_corr_twin_deaths
 
 # 1) Baseline SR parameters (single-value arrays as expected by the factory)
 baseline_params = {
@@ -107,8 +107,8 @@ mz_death_table = calc_twin_death_table(sim_mz)
 dz_death_table = calc_twin_death_table(sim_dz)
 
 # Compute Pearson correlation and ICC for each
-mz_pearson = calc_pearson_corr_twin_deaths(sim_mz)
-dz_pearson = calc_pearson_corr_twin_deaths(sim_dz)
+mz_pearson = calc_pearson_corr_twin_deaths(sim_mz, filter_age=15)
+dz_pearson = calc_pearson_corr_twin_deaths(sim_dz, filter_age=15)
 
 print(f"MZ twin Pearson correlation: {mz_pearson:.3f}")
 print(f"DZ twin Pearson correlation: {dz_pearson:.3f}")
